@@ -1,10 +1,17 @@
+h3 {
+    margin: 0;
+}
+
 div {
+    margin: 15px;
+    padding: 5px;
+    border-radius: 5px;
     text-align: center;
     transition: all 700ms;
 }
 
 div:hover {
-    border: 5px solid black;
+    border: thick double black;
 }
 
 div:nth-of-type(1) {
@@ -17,7 +24,8 @@ div:nth-of-type(2) {
 
 div:nth-of-type(3) {
     background-color: #A8C686;
-    font-size: 30px;
+    padding: 15px;
+    
 }
 
 div:nth-of-type(4) {
