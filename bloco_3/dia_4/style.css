@@ -2,12 +2,32 @@ h1 {
   text-align: center;
 }
 
+.rankings {
+  text-align: center;
+}
+
+.rankings-positions {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.rankings-positions li {
+  display: inline-block;
+}
+
+.rankings-positions li:nth-child(1) {
+  display: block;
+  margin: 0 auto;
+}
+
 .first {
   background-color: rgb(235, 200, 84);
   font-size: 20px;
   height: 50px;
   text-align: center;
   width: 200px;
+ 
 }
 
 .second {
@@ -24,4 +44,13 @@ h1 {
   height: 50px;
   text-align: center;
   width: 300px;
+}
+
+.rewards {
+  text-align: center;
+}
+
+.rewards li {
+  list-style: none;
+  display: inline-block;
 }
