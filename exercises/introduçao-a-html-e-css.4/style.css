@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+}
+
+header {
+    background-color: lightgrey;
+    text-align: center;
+}
+
+nav {
+    background-color: antiquewhite;
+    text-align: right;
+}
+
+.main-article {
+    padding: 15px;
+    background-color: rebeccapurple;
+}
+
+.main-article h2 {
+    text-align: center;
+}
+
+.description {
+    background-color: red;
+}
+
