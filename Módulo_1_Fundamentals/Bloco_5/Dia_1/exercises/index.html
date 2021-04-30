@@ -1,0 +1,104 @@
+<!-- Exercícios Dia 5.1 - Funções de manipulação do DOM -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Exercício 5.1</title>
+
+    <style>
+      div {
+        border-color: black;
+        border-style: solid;
+      }
+      .title {
+        text-align: center;
+      }
+
+      .main-content {
+        background-color: yellow;
+      }
+
+      .main-content .center-content {
+        background-color: red;
+        width: 50%;
+        margin: 0 auto;
+      }
+
+      .main-content .center-content p {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Exercício 5.1 - JavaEscripito </h1>
+    <div class="main-content">
+      <div class="center-content">
+        <p>Texto padrão do nosso site</p>
+        <p>-----</p>
+        <p>Trybe</p>
+      </div>
+    </div>
+    <script>
+        /*
+        Aqui você vai modificar os elementos já existentes utilizando apenas as funções:
+        - document.getElementById()
+        - document.getElementsByClassName()
+        - document.getElementsByTagName()
+        1. Crie uma função que mude o texto na tag <p> para uma descrição de como você se vê daqui a 2 anos. (Não gaste tempo pensando no texto e sim realizando o exercício)
+        2. Crie uma função que mude a cor do quadrado amarelo para o verde da Trybe (rgb(76,164,109)).
+        3. Crie uma função que mude a cor do quadrado vermelho para branco.
+        4. Crie uma função que corrija o texto da tag <h1>.
+        5. Crie uma função que modifique todo o texto da tag <p> para maiúsculo.
+        6. Crie uma função que exiba o conteúdo de todas as tags <p> no console.
+        */
+
+        //Exercício 1
+        function tagPChange() {
+          let paragraph = document.getElementsByTagName('p')[1];
+          paragraph.innerHTML = 'Trabalhando na área de tecnologia como um Desenvolvedor Web avançando na minha carreira e buscando me tornar melhor a cada dia.';
+        };
+        tagPChange();
+
+        //Exercício 2
+        function yellowSquaresToTrybeGreen() {
+          let mainContent = document.getElementsByClassName('main-content')[0];
+          mainContent.style.backgroundColor = 'rgb(76,164,109)';
+        };
+        yellowSquaresToTrybeGreen();
+
+        //Exercício 3
+        function redSquareToWhite() {
+          let centerContent = document.getElementsByClassName('center-content')[0];
+          centerContent.style.backgroundColor = 'white';
+        };
+        redSquareToWhite();
+
+        //Exercício 4
+        function fixTagH1() {
+          let firstTitle = document.getElementsByTagName('h1')[0];
+          firstTitle.innerHTML = 'Exercício 5.1 - JavaScript';
+        };
+        fixTagH1();
+
+        //Exercício 5
+        function tagPToUpperCase() {
+          let firstParagraph = document.getElementsByTagName('p')[0];
+          firstParagraph.innerHTML = 'Minha vida daqui a 2 anos:';
+          firstParagraph.innerHTML = firstParagraph.innerHTML.toUpperCase();
+          firstParagraph.style.textDecoration = 'underline';
+        };
+        tagPToUpperCase()
+
+        //Exercício 6
+        function tagsPOnConsole() {
+          let allParagraphs = document.getElementsByTagName('p');
+          for (let index = 0; index < allParagraphs.length; index += 1) {
+            console.log(allParagraphs[index].innerHTML);
+          };
+        };
+        tagsPOnConsole();
+    </script>
+  </body>
+</html>
