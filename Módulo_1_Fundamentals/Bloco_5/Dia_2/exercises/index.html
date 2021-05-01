@@ -70,6 +70,10 @@
       let divCenterContent = document.createElement('div');
       divCenterContent.className = 'center-content';
       document.querySelector('.main-content').appendChild(divCenterContent);
+      //4. Adicione a tag p como filho do div criado no passo 3 e coloque algum texto;
+      let firstParagraph = document.createElement('p');
+      firstParagraph.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non.';
+      document.querySelector('.center-content').appendChild(firstParagraph);      
     </script>
   </body>
 </html>
