@@ -95,6 +95,11 @@
         itemList.innerHTML = index;
         document.getElementsByTagName('ul')[0].appendChild(itemList);
       };
+      //9. Adicione 3 tags h3 , todas sendo filhas do div criado no passo 2.
+      for (let index = 0; index < 3; index += 1) {
+        let restOfTitles = document.createElement('h3');
+        document.querySelector('.main-content').appendChild(restOfTitles);
+      };
     </script>
   </body>
 </html>
