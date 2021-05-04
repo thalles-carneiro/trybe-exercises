@@ -159,3 +159,23 @@ function addEventToTask() {
 };
 
 addEventToTask();
+
+//Exercício 10
+function setDayColor() {
+  const getMonthDaysList = document.querySelector('#days');
+  const selectedTask = document.getElementsByClassName('task selected');
+  const getTasks = document.querySelector('.task');
+  const taskColor = getTasks.style.backgroundColor;
+
+  getMonthDaysList.addEventListener('click', function (event) {
+    const eventTargetColor = event.target.style.color;
+    if (selectedTask.length > 0 && eventTargetColor !== taskColor) {
+      const color = selectedTask[0].style.backgroundColor;
+      event.target.style.color = color;
+    } else if (eventTargetColor === taskColor && selectedTask.length !== 0) {
+      event.target.style.color = 'rgb(119,119,119)';
+    };
+  });
+};
+
+setDayColor();
