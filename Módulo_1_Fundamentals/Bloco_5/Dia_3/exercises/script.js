@@ -95,3 +95,29 @@ function changeFridaysText(fridaysArray) {
 
 let decemberFridays = [4, 11, 18, 25];
 changeFridaysText(decemberFridays);
+
+//Exercício 6
+function zoomInEffect() {
+  const getDays = document.getElementsByClassName('day');
+
+  for (let index = 0; index < getDays.length; index += 1) {
+    getDays[index].addEventListener('mouseover', function (event) {
+      event.target.style.fontSize = 'xx-large';
+      event.target.style.fontWeight = 'bolder';
+    });
+  };
+};
+
+function zoomOutEffect() {
+  const getDays = document.getElementsByClassName('day');
+  
+  for (let index = 0; index < getDays.length; index += 1) {
+    getDays[index].addEventListener('mouseout', function (event) {
+      event.target.style.fontSize = '20px';
+      event.target.style.fontWeight = 'unset';
+    });
+  };
+};
+
+zoomInEffect();
+zoomOutEffect();
