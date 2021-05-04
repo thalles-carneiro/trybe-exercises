@@ -104,6 +104,7 @@ function zoomInEffect() {
     getDays[index].addEventListener('mouseover', function (event) {
       event.target.style.fontSize = 'xx-large';
       event.target.style.fontWeight = 'bolder';
+      event.target.style.transition = 'all 1s';
     });
   };
 };
@@ -121,3 +122,13 @@ function zoomOutEffect() {
 
 zoomInEffect();
 zoomOutEffect();
+
+//Exercício 7
+function createTaskInCalendar(task) {
+  const getMyTasks = document.querySelector('.my-tasks');
+  const createTask = document.createElement('span');
+  createTask.innerHTML = task;
+  getMyTasks.appendChild(createTask);
+};
+
+createTaskInCalendar('Estudar conteúdo do dia 5.3');
