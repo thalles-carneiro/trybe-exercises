@@ -13,6 +13,7 @@ function createDaysOfTheWeek() {
 
 createDaysOfTheWeek();
 
+//Exercício 1
 function createzDaysOfTheMonth() {
   const dezDaysList = [29, 30, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
   const getMonthDaysList = document.querySelector('#days');
@@ -29,11 +30,11 @@ function createzDaysOfTheMonth() {
     };
     getMonthDaysList.appendChild(monthDaysListItem);
   };
-
 };
 
 createzDaysOfTheMonth();
 
+//Exercício 2
 function createHolidayButton(string) {
   const getButtonsContainer = document.querySelector('.buttons-container');
   const holidayButton = document.createElement('button');
@@ -43,4 +44,24 @@ function createHolidayButton(string) {
 };
 
 createHolidayButton('Feriados');
+
+//Exercício 3
+function displayHolidays() {
+  const getHolidayButton = document.getElementById('btn-holiday');
+  const getDaysOfHoliday = document.getElementsByClassName('holiday');
+  const backgroundColor = 'rgb(238,238,238)';
+  const setNewColor = 'coral';
+  
+  getHolidayButton.addEventListener('click', function () {
+    for (let day of getDaysOfHoliday) {
+      if (day.style.backgroundColor === setNewColor) {
+        day.style.backgroundColor = backgroundColor;
+      } else {
+        day.style.backgroundColor = setNewColor;
+      };
+    };
+  });
+};
+
+displayHolidays()
 
