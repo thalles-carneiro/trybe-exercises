@@ -35,10 +35,10 @@ function createzDaysOfTheMonth() {
 createzDaysOfTheMonth();
 
 //Exercício 2
-function createHolidayButton(string) {
+function createHolidayButton(buttonName) {
   const getButtonsContainer = document.querySelector('.buttons-container');
   const holidayButton = document.createElement('button');
-  holidayButton.innerHTML = string;
+  holidayButton.innerHTML = buttonName;
   holidayButton.id = 'btn-holiday';
   getButtonsContainer.appendChild(holidayButton);
 };
@@ -65,3 +65,13 @@ function displayHolidays() {
 
 displayHolidays()
 
+//Exercício 4
+function createFridayButton(buttonName) {
+  const getButtonsContainer = document.querySelector('.buttons-container');
+  const fridayButton = document.createElement('button');
+  fridayButton.innerHTML = buttonName;
+  fridayButton.id = 'btn-friday';
+  getButtonsContainer.appendChild(fridayButton);
+};
+
+createHolidayButton('Sexta-feira');
