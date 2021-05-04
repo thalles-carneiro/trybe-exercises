@@ -132,3 +132,14 @@ function createTaskInCalendar(task) {
 };
 
 createTaskInCalendar('Estudar conteúdo do dia 5.3');
+
+//Exercício 8
+function addTaskSubtitle(color) {
+  const getMyTasks = document.querySelector('.my-tasks');
+  const createTaskSubtitle = document.createElement('div');
+  createTaskSubtitle.className = 'task';
+  createTaskSubtitle.style.backgroundColor = color;
+  getMyTasks.appendChild(createTaskSubtitle);
+};
+
+addTaskSubtitle('seagreen');
