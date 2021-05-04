@@ -41,7 +41,7 @@ myWebpage.addEventListener('mouseover', function (event) {
 event.target.style.color = 'red';
 });
 
-myWebpage.addEventListener('mouseover', function (event) {
+myWebpage.addEventListener('mouseout', function (event) {
 event.target.style.color = 'unset';
 });
 
