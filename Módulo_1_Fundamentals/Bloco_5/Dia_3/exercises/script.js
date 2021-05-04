@@ -143,3 +143,19 @@ function addTaskSubtitle(color) {
 };
 
 addTaskSubtitle('seagreen');
+
+//Exercício 9
+function addEventToTask() {
+  const selectedTask = document.getElementsByClassName('task selected');
+  const getTasks = document.querySelector('.task');
+
+  getTasks.addEventListener('click', function (event) {
+    if (selectedTask.length === 0) {
+      event.target.className = 'task selected';
+    } else {
+      event.target.className = 'task';
+    };
+  });
+};
+
+addEventToTask();
