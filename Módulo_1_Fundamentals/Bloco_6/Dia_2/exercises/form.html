@@ -11,36 +11,36 @@
 </head>
 <body>
   <h1 class="title is-1">Formulário de Cadastro de Currículo</h1>
-  <form class="col s12" action="" method="GET">
+  <form class="js-form col s12" action="" method="GET">
       <h2 class="subtitle is-4">Dados Pessoais</h2>
       <div class="field">
         <label class="label" for="input-name">Nome Completo:</label>
         <div class="control">
-          <input class="input" type="text" name="name" id="input-name" placeholder="Digite seu nome" maxlength="40" required>
+          <input class="input" data-validate-field="name" type="text" name="name" id="input-name" placeholder="Digite seu nome">
         </div>
       </div>
       <div class="field">
         <label class="label" for="input-email">E-mail:</label>
         <div class="control">
-          <input class="input" type="text" name="email" id="input-email" placeholder="Digite seu e-mail" maxlength="50" required>
+          <input class="input" data-validate-field="email" type="text" name="email" id="input-email" placeholder="Digite seu e-mail">
         </div>
       </div>
       <div class="field">
         <label class="label" for="input-cpf">CPF:</label>
         <div class="control">
-          <input class="input" type="text" name="cpf" id="input-cpf" placeholder="Digite seu CPF" maxlength="11" required>
+          <input class="input" data-validate-field="cpf" type="text" name="cpf" id="input-cpf" placeholder="Digite seu CPF (apenas números)">
         </div>
       </div>
       <div class="field">
         <label class="label" for="input-address">Endereço:</label>
         <div class="control">
-          <input class="input" type="text" name="address" id="input-address" placeholder="Digite seu endereço" maxlength="200" required>
+          <input class="input" data-validate-field="address" type="text" name="address" id="input-address" placeholder="Digite seu endereço">
         </div>
       </div>
       <div class="field">
         <label class="label" for="input-city">Cidade:</label>
         <div class="control">
-          <input class="input" type="text" name="city" id="input-city" placeholder="Digite sua cidade" maxlength="28" required>
+          <input class="input" data-validate-field="city" type="text" name="city" id="input-city" placeholder="Digite sua cidade">
         </div>
       </div>
       <label class="label" for="input-state">Estado:
@@ -64,25 +64,25 @@
       <div class="field">
         <label class="label" for="curriculum-resume">Resumo do Currículo:</label>
         <div class="control">
-          <textarea class="textarea" name="curriculum-resume" id="curriculum-resume" placeholder="Faça um resumo sobre o seu currículo " cols="50" rows="5" maxlength="1000" required></textarea>
+          <textarea class="textarea" data-validate-field="curriculum_resume" name="curriculum-resume" id="curriculum-resume" placeholder="Faça um resumo sobre o seu currículo " cols="50" rows="5"></textarea>
         </div>
       </div>
       <div class="field">
         <label class="label" for="input-role">Cargo:</label>
         <div class="control">
-          <input class="input" type="text" name="role" id="input-role" placeholder="Digite seu cargo" maxlength="40" required>
+          <input class="input" data-validate-field="role" type="text" name="role" id="input-role" placeholder="Digite seu cargo">
         </div>
       </div>
       <div class="field">
         <label class="label" for="role-description">Descrição do Cargo:</label>
         <div class="control">
-          <input class="input" type="text" name="role-description" id="role-description" placeholder="Digite a descrição do cargo" maxlength="500" required>
+          <input class="input" data-validate-field="role_description" type="text" name="role-description" id="role-description" placeholder="Digite a descrição do cargo">
         </div>
       </div>
       <div class="field">
         <label class="label" for="start-role-date">Data de Início:</label>
         <div class="control">
-          <input class="input" type="text" name="start-role-date" id="start-role-date" placeholder="Digite a data de início" required>
+          <input class="input" data-validate-field="start_role_date" type="text" name="start-role-date" id="start-role-date" autocomplete="off" placeholder="Digite a data de início">
         </div>
       </div>
       <br>
@@ -91,6 +91,7 @@
   </form>
   <script src="./node_modules/moment/moment.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+  <script src="./node_modules/just-validate/dist/js/just-validate.min.js"></script>
   <script src="script.js"></script>  
 </body>
 </html>

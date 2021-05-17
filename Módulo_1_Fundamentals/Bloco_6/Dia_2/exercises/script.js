@@ -1,17 +1,6 @@
 const selectState = document.getElementById('input-state');
 allStatesInfos();
 
-let isValid = [];
-let allInfoForm = {};
-let allErrors = {};
-
-const getForm = document.querySelector('form');
-getForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  allValidations();
-  showInfos();
-});
-
 //Gera as opções de escolha dos estados brasileiros
 function allStatesInfos() {
   const allInitials = ['ac', 'al', 'ap', 'am', 'ba', 'ce', 'df', 'es', 'go', 'ma', 'mt', 'ms', 'mg', 'pa', 'pb', 'pr', 'pe', 'pi', 'rj', 'rn', 'rs', 'ro', 'rr', 'sc', 'sp', 'se', 'to'];
@@ -24,131 +13,7 @@ function allStatesInfos() {
   }
 }
 
-//Validação do Nome
-function isValidName() {
-  const inputName = document.getElementById('input-name');
-  const inputNameValue = inputName.value;
-  if (!inputNameValue || inputNameValue.length > 40) {
-    isValid.push(false);
-    allErrors.name = 'Insira um nome válido.';
-  } else {
-    allInfoForm.name = inputNameValue;
-    isValid.push(true);
-  }
-}
-
-
-//Validação do Email
-//Referência que utilizei para entender essa parte de validar usando regex para o e-mail
-//https://www.regular-expressions.info/email.html
-function isValidEmail() {
-  const inputEmail = document.getElementById('input-email');
-  const inputEmailValue = inputEmail.value;
-  const regexEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-  if (!inputEmailValue || inputEmailValue.length > 50 || !regexEmail.test(inputEmailValue)) {
-    isValid.push(false);
-    allErrors.email = 'Insira um e-mail válido.';
-  } else {
-    allInfoForm.email = inputEmailValue;
-    isValid.push(true);
-  }
-}
-
-//Validação do CPF
-function isValidCpf() {
-  const inputCpf = document.getElementById('input-cpf');
-  const inputCpfValue = inputCpf.value;
-  const regexCpf = /^[0-9]{11}$/;
-  if (!inputCpfValue || !regexCpf.test(inputCpfValue)) {
-    isValid.push(false);
-    allErrors.cpf = 'Insira um CPF válido.';
-  } else {
-    allInfoForm.cpf = inputCpfValue;
-    isValid.push(true);
-  }
-}
-
-//Validação do Endereço
-function isValidAddress() {
-  const inputAddress = document.getElementById('input-address');
-  const inputAddressValue = inputAddress.value;
-  if (!inputAddressValue || inputAddressValue.length > 200) {
-    isValid.push(false);
-    allErrors.address = 'Insira um endereço válido.';
-  } else {
-    allInfoForm.address = inputAddressValue;
-    isValid.push(true);
-  }
-}
-
-//Validação da Cidade
-function isValidCity() {
-  const inputCity = document.getElementById('input-city');
-  const inputCityValue = inputCity.value;
-  if (!inputCityValue || inputCityValue.length > 28) {
-    isValid.push(false);
-    allErrors.city = 'Insira uma cidade válida.';
-  } else {
-    allInfoForm.city = inputCityValue;
-    isValid.push(true);
-  }
-}
-
-//Validação do Resumo do Currículo
-function isValidCurriculumResume() {
-  const inputCurriculumResume = document.getElementById('curriculum-resume');
-  const inputCurriculumResumeValue = inputCurriculumResume.value;
-  if (!inputCurriculumResumeValue || inputCurriculumResumeValue.length > 1000) {
-    isValid.push(false);
-    allErrors['curriculum-resume'] = 'Insira um resumo do currículo válido.';
-  } else {
-    allInfoForm['curriculum-resume'] = inputCurriculumResumeValue;
-    isValid.push(true);
-  }
-}
-
-//Validação da Descrição do Cargo
-function isValidRole() {
-  const inputRole = document.getElementById('input-role');
-  const inputRoleValue = inputRole.value;
-  if (!inputRoleValue || inputRoleValue.length > 40) {
-    isValid.push(false);
-    allErrors.role = 'Insira um cargo válido.';
-  } else {
-    allInfoForm.role = inputRoleValue;
-    isValid.push(true);
-  }
-}
-
-//Validação da Descrição do Cargo
-function isValidRoleDescription() {
-  const inputRoleDescription = document.getElementById('role-description');
-  const inputRoleDescriptionValue = inputRoleDescription.value;
-  if (!inputRoleDescriptionValue || inputRoleDescriptionValue.length > 500) {
-    isValid.push(false);
-    allErrors['role-description'] = 'Insira uma descrição para o cargo válida.';
-  } else {
-    allInfoForm['role-description'] = inputRoleDescriptionValue;
-    isValid.push(true);
-  }
-}
-
-//Validação da Data de Início
-//Referência que utilizei para entender essa parte do regex
-//https://www.regular-expressions.info/dates.html#:~:text=%5E(19%7C20)%5C,a%20choice%20of%20four%20separators.
-function isValidStartRoleDate() {
-  const inputStartRoleDate = document.getElementById('start-role-date');
-  const inputStartRoleDateValue = inputStartRoleDate.value;
-  // const regexDate = /^(0[1-9]|1\d|2\d|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/;
-  // if(!regexDate.test(inputStartRoleDateValue)) {
-    // isValid.push(false);
-    // allErrors['start-role-date'] = 'Insira uma data válida.';
-  // } else {
-    allInfoForm['start-role-date'] = inputStartRoleDateValue;
-    isValid.push(true);
-  // }
-}
-
+//Utilizando a biblioteca de date picker Pickaday em conjunto do Moment.js
 let picker = new Pikaday({
   field: document.getElementById('start-role-date'),
   format: 'DD/MM/YYYY',
@@ -165,50 +30,96 @@ let picker = new Pikaday({
   },
 });
 
-//Efetuando todas as validações
-function allValidations() {
-  isValid = [];
-  allInfoForm = {};
-  allErrors = {};
+//Utilizando a biblioteca de validações Just-validate
+new window.JustValidate('.js-form', {
+  rules: {
+    name: {
+      required: true,
+      maxLength: 40,
+    },
+    email: {
+      required: true,
+      email: true,
+      maxLength: 50,
+    },
+    cpf: {
+      required: true,
+      strength: {custom: /^\d{11}$/},
+      minLength: 11,
+      maxLength: 11,
+    },
+    address: {
+      required: true,
+      maxLength: 200,
+    },
+    city: {
+      required: true,
+      maxLength: 28,
+    },
+    curriculum_resume: {
+      required: true,
+      maxLength: 1000,
+    },
+    role: {
+      required: true,
+      maxLength: 40,
+    },
+    role_description: {
+      required: true,
+      maxLength: 500,
+    },
+    start_role_date: {
+      required: true,
+    },
+  },
 
-  isValidName();
-  isValidEmail();
-  isValidCpf();
-  isValidAddress();
-  isValidCity();
-  allInfoForm.state = selectState.value;
-  const inputTypeHomeChecked = document.querySelector("input[checked]");
-  allInfoForm['type-home'] = inputTypeHomeChecked.value;
-  isValidCurriculumResume();
-  isValidRole();
-  isValidRoleDescription();
-  isValidStartRoleDate();
-}
+  messages: {
+    name: {
+      required: 'O campo é obrigatório',
+      maxLength: 'O campo deve conter no máximo 40 caracteres',
+    },
+    email: {
+      required: 'O campo é obrigatório',
+      email: 'Por favor, digite um email válido',
+    },
+    cpf: {
+      required: 'O campo é obrigatório',
+      strength: 'Por favor, digite um CPF válido',
+      minLength: 'Por favor, digite um CPF válido',
+      maxLength: 'Por favor, digite um CPF válido',
+    },
+    address: {
+      required: 'O campo é obrigatório',
+      maxLength: 'O campo deve conter no máximo 200 caracteres',
+    },
+    city: {
+      required: 'O campo é obrigatório',
+      maxLength: 'O campo deve conter no máximo 28 caracteres',
+    },
+    curriculum_resume: {
+      required: 'O campo é obrigatório',
+      maxLength: 'O campo deve conter no máximo 1000 caracteres'
+    },
+    role: {
+      required: 'O campo é obrigatório',
+      maxLength: 'O campo deve conter no máximo 40 caracteres'
+    },
+    role_description: {
+      required: 'O campo é obrigatório',
+      maxLength: 'O campo deve conter no máximo 500 caracteres'
+    },
+    start_role_date: {
+      required: 'O campo é obrigatório',
+    },
+  },
 
-//Cria uma função para mostrar na tela do usuários quais as informações que estão incorretas e as informações válidas
-function showInfos() {
-  if(!isValid.includes(false)) {
-    const formInfoDiv = document.createElement('div');
-    getForm.submit();
-    showValidInfos(formInfoDiv);
-  } else {
-    const formErrorDiv = document.createElement('div');
-    showErrors(formErrorDiv);
-  }
-}
+  focusWrongField: true,
 
-//Cria um alert que mostra todos as informações válidas
-function showValidInfos(infosDiv) {
-  for(let info in allInfoForm) {
-    infosDiv.innerHTML += `${allInfoForm[info]}\n`;
-  }
-  alert(infosDiv.innerText);
-}
-
-//Cria um alert que mostra todos os inputs que estão incorretos
-function showErrors(errorDiv) {
-  for(let erro in allErrors) {
-    errorDiv.innerHTML += `${allErrors[erro]}\n`;
-  }
-  alert(errorDiv.innerText);
-}
+  submitHandler: function (form, values) {
+    console.log(form, values);
+  },
+  
+  invalidFormCallback: function (errors) {
+    console.log(errors);
+  },
+});
