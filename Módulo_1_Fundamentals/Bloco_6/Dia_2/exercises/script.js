@@ -139,15 +139,31 @@ function isValidRoleDescription() {
 function isValidStartRoleDate() {
   const inputStartRoleDate = document.getElementById('start-role-date');
   const inputStartRoleDateValue = inputStartRoleDate.value;
-  const regexDate = /^(0[1-9]|1\d|2\d|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/;
-  if(!regexDate.test(inputStartRoleDateValue)) {
-    isValid.push(false);
-    allErrors['start-role-date'] = 'Insira uma data válida.';
-  } else {
+  // const regexDate = /^(0[1-9]|1\d|2\d|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/;
+  // if(!regexDate.test(inputStartRoleDateValue)) {
+    // isValid.push(false);
+    // allErrors['start-role-date'] = 'Insira uma data válida.';
+  // } else {
     allInfoForm['start-role-date'] = inputStartRoleDateValue;
     isValid.push(true);
-  }
+  // }
 }
+
+let picker = new Pikaday({
+  field: document.getElementById('start-role-date'),
+  format: 'DD/MM/YYYY',
+  defaultDate: '01/01/2021',
+  setDefaultDate: true,
+  showDaysInNextAndPreviousMonths: true,
+  enableSelectionDaysInNextAndPreviousMonths: true,
+  i18n: {
+    previousMonth : 'Mês Anterior',
+    nextMonth     : 'Próximo Mês',
+    months        : ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    weekdays      : ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    weekdaysShort : ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']
+  },
+});
 
 //Efetuando todas as validações
 function allValidations() {
