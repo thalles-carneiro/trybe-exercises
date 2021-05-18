@@ -55,5 +55,19 @@ html {
     line-height: 1.2;
   }
 
-  
+  .main-content {
+    text-align: left;
+    padding: 20px;
+  }
+
+  .main-content p {
+    text-align: justify;
+    font-size: 22px;
+  }
+
+  footer {
+    padding: 10px;
+    text-align: justify;
+    font-size: 18px;
+  }
 }
