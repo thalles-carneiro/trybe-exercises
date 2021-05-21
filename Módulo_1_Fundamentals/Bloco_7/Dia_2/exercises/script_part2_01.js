@@ -24,7 +24,14 @@ const addNewShift = (object, key, value) => {
 };
 addNewShift(lesson2, 'turno', 'manhã');
 console.log(lesson2);
+console.log('--------------');
 
 //2. Crie uma função para listar as keys de um objeto. Essa função deve receber um objeto como parâmetro.
 const objKeys = (obj) => Object.keys(obj);
 console.log(objKeys(lesson1));
+console.log('--------------');
+
+//3. Crie uma função para mostrar o tamanho de um objeto.
+const objLength = (obj) => Object.entries(obj).length;
+console.log(objLength(lesson1));
+console.log('--------------');
