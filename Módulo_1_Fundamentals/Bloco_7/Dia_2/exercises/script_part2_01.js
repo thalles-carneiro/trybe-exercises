@@ -24,3 +24,7 @@ const addNewShift = (object, key, value) => {
 };
 addNewShift(lesson2, 'turno', 'manhã');
 console.log(lesson2);
+
+//2. Crie uma função para listar as keys de um objeto. Essa função deve receber um objeto como parâmetro.
+const objKeys = (obj) => Object.keys(obj);
+console.log(objKeys(lesson1));
