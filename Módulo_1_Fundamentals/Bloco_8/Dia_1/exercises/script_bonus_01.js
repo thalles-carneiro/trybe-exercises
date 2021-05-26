@@ -60,6 +60,38 @@ const mageAtk = (mage) => {
   };
 };
 
-console.log(dragonAtk(dragon));
-console.log(warriorAtk(warrior));
-console.log(mageAtk(mage));
+//Parte II
+
+const gameActions = {
+  //1 - Crie a primeira HOF que compõe o objeto gameActions . Ela será a função que simula o turno do personagem warrior . Esta HOF receberá como parâmetro a função que calcula o dano deferido pelo personagem warrior e atualizará os healthPoints do monstro dragon . Além disto ela também deve atualizar o valor da chave damage do warrior .
+  warriorTurn: (callbackWarrior) => {
+    battleMembers.dragon.healthPoints -= callbackWarrior(warrior);
+    battleMembers.warrior.damage = callbackWarrior(warrior);
+  },
+  
+  //2 - Crie a segunda HOF que compõe o objeto gameActions . Ela será a função que simula o turno do personagem mage . Esta HOF receberá como parâmetro a função que calcula o dano deferido pelo personagem mage e atualizará os healthPoints do monstro dragon . Além disto ela também deve atualizar o valor das chaves damage e mana do mage.
+  mageTurn: (callbackMage) => {
+    battleMembers.dragon.healthPoints -= callbackMage(mage).mageDmg;
+    battleMembers.mage.damage = callbackMage(mage).mageDmg;
+    battleMembers.mage.mana -= callbackMage(mage).usedMana;
+  },
+
+  //3 - Crie a terceira HOF que compõe o objeto gameActions . Ela será a função que simula o turno do monstro dragon . Esta HOF receberá como parâmetro a função que calcula o dano deferido pelo monstro dragon e atualizará os healthPoints dos personagens mage e warrior . Além disto ela também deve atualizar o valor da chave damage do monstro.
+  dragonTurn: (callbackDragon) => {
+    battleMembers.warrior.healthPoints -= callbackDragon(dragon);
+    battleMembers.mage.healthPoints -= callbackDragon(dragon);
+    battleMembers.dragon.damage = callbackDragon(dragon);
+  },
+
+  //4 - Adicione ao objeto gameActions uma função que retorne o objeto battleMembers atualizado e faça um console.log para visualizar o resultado final do turno.
+  turnResults: () => battleMembers,
+};
+
+//1 - Turno do Guerreiro
+gameActions.warriorTurn(warriorAtk);
+//2 - Turno do Mago
+gameActions.mageTurn(mageAtk);
+//3 - Turno do Dragão
+gameActions.dragonTurn(dragonAtk);
+//4 - Resultados do Turno
+console.log(gameActions.turnResults());
