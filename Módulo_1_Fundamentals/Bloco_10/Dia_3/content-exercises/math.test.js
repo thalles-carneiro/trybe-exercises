@@ -48,4 +48,24 @@ describe("Testando as funções do arquivo math.js", () => {
     expect(mockDividir).toHaveBeenCalledTimes(3);
     expect(mockDividir).toHaveBeenCalledWith(75, 5);
   });
+
+  it('Testa o mock da função subtrair de modo que possa restaurar sua implementação original', () => {
+    const mockSubtrair = jest.spyOn(math, 'subtrair');
+    mockSubtrair.mockClear();
+    mockSubtrair.mockImplementation((a, b) => a * b);
+    mockSubtrair.mockReturnValue(20);
+
+    expect(mockSubtrair(4, 5)).toBe(20);
+    expect(mockSubtrair).toHaveBeenCalled();
+    expect(mockSubtrair).toHaveBeenCalledTimes(1);
+    expect(mockSubtrair).toHaveBeenCalledWith(4, 5);
+
+    mockSubtrair.mockRestore();
+    mockSubtrair.mockReturnValue(10);
+
+    expect(mockSubtrair(20, 10)).toBe(10);
+    expect(mockSubtrair).toHaveBeenCalled();
+    expect(mockSubtrair).toHaveBeenCalledTimes(1);
+    expect(mockSubtrair).toHaveBeenCalledWith(20, 10);
+  });
 });
