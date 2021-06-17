@@ -26,4 +26,26 @@ describe("Testando as funções do arquivo math.js", () => {
     expect(mockSomar).toHaveBeenCalledWith(1, 2);
     expect(mockSomar(1, 2)).resolves.toBe(3);
   });
+
+  it('Testa a função dividir: sua chamada, retorno e parâmetros', () => {
+    const mockDividir = jest.spyOn(math, 'dividir');
+    mockDividir.mockReturnValue(15)
+    mockDividir.mockReturnValueOnce(2)
+    mockDividir.mockReturnValueOnce(5)
+
+    expect(mockDividir(8, 4)).toBe(2);
+    expect(mockDividir).toHaveBeenCalled();
+    expect(mockDividir).toHaveBeenCalledTimes(1);
+    expect(mockDividir).toHaveBeenCalledWith(8, 4);
+
+    expect(mockDividir(50, 10)).toBe(5);
+    expect(mockDividir).toHaveBeenCalled();
+    expect(mockDividir).toHaveBeenCalledTimes(2);
+    expect(mockDividir).toHaveBeenCalledWith(50, 10);
+
+    expect(mockDividir(75, 5)).toBe(15);
+    expect(mockDividir).toHaveBeenCalled();
+    expect(mockDividir).toHaveBeenCalledTimes(3);
+    expect(mockDividir).toHaveBeenCalledWith(75, 5);
+  });
 });
