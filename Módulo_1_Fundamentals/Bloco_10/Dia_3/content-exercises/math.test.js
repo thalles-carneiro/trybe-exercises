@@ -16,4 +16,14 @@ describe("Testando as funções do arquivo math.js", () => {
     expect(math.multiplicar).toHaveBeenCalled();
     expect(math.multiplicar()).toBe(10);
   });
+
+  it('Testa a função somar: sua chamada, retorno e parâmetros', () => {
+    const mockSomar = jest.spyOn(math, 'somar');
+
+    mockSomar(1, 2);
+    expect(mockSomar).toHaveBeenCalled();
+    expect(mockSomar).toHaveBeenCalledTimes(1);
+    expect(mockSomar).toHaveBeenCalledWith(1, 2);
+    expect(mockSomar(1, 2)).resolves.toBe(3);
+  });
 });
