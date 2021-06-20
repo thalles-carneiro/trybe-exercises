@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+}
+
+header {
+    background-color: #002863;
+    color: #FFFFFF;
+    padding: 1em 0;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+nav {
+    background-color: #A0E6FF;
+    padding: 0.7em;
+    text-align: right;
+}
+
+nav a {
+    padding: 0 0.5em;
+}
+
+a {
+    text-decoration: none;
+    color: #404674;
+}
+
+a:hover {
+    color: #701F60;
+}
+
+li {
+    list-style-type: square;
+}
+
+section {
+    padding: 2em;
+    font-size: 1.5em;
+    color: #404674;
+}
+
+section p {
+    display: inline-block;
+    width: 50%;
+    text-align: justify;
+}
+
+.main-article {
+    background-color: #DBF6F9;
+}
+
+.main-article h2 {
+    color: #404674;
+    padding: 0.5em;
+    text-align: center;
+    font-size: 2.2em;
+}
+
+h3 {
+    text-decoration: underline;
+    padding-bottom: 0.5em;
+}
+
+.description {
+    background-color: #E8F5FF;
+}
+
+.description table {
+    border: thin solid aquamarine;
+    border-radius: 10px;
+    background-color: azure;
+    margin: 0 auto 0.5em;
+}
+
+table, th, td {
+    border: 1px solid aquamarine;
+    border-radius: 10px;
+}
+
+.description p {
+    width: fit-content;
+}
+
+.strength-div {
+    padding-bottom: 1em;
+}
+
+.strength-div p {
+    width: 50%;
+    vertical-align: middle;
+}
+
+.strength-div img {
+    width: 40%;
+    vertical-align: middle;
+    margin-left: 3em;
+}
+
+.bottom-image {
+    display: block;
+    width: 50%;
+    margin: auto;  
+}
+
+.cavitation {
+    background-color: #E8F5FF;
+}
+
+.cavitation p {
+    width: 60%;
+    vertical-align: middle;
+}
+
+.cavitation img {
+    width: 30%;
+    vertical-align: middle;
+    margin-left: 3em;
+}
+
+.incredible-vision p {
+    width: 60%;
+    vertical-align: middle;
+}
+
+.incredible-vision img {
+    width: 30%;
+    vertical-align: middle;
+    margin-left: 3em;
+}
+
+.amazing-eyes {
+    background-color: #E8F5FF;
+}
+
+.amazing-eyes p {
+    width: fit-content;
+    padding-bottom: 1em;
+}
+
+.amazing-eyes img {
+    display: block;
+    width: 50%;
+    margin: auto;    
+}
+
+.video-link {
+    background-color: brown;
+    border: thick solid salmon;
+    border-radius: 50px;
+    text-align: center;
+    position: absolute;
+    top: 49em;
+    left: 81em;
+    padding: 0.7em;
+}
+
+.references {
+    background-color: #A0E6FF;
+}
+
+footer {
+    background-color: #002863;
+    color: #FFFFFF;
+    padding: 0.7em;
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
