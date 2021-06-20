@@ -1,0 +1,29 @@
+1. O que é um código que é executado de modo assíncrono? Qual é a diferença disso para um código que é executado de modo síncrono?
+
+R: Um código executado em modo assíncrono não segue o fluxo normal de execução, pois ele saí em algum momento da fila de execução e só após completar sua função que retorna à fila. Já o código que é executado de modo sícrono segue a ordem de execução padrão, respeitando a fila de execução e o fluxo normal.
+
+Gabarito: Um código assíncrono é um código que não "trava" a fila de execução, isto é, a próxima instrução não espera o fim da instrução assíncrona para iniciar, diferentemente do código síncrono, que a próxima instrução só inicia ao final da anterior.
+
+2. Quando você tem que enfileirar várias callbacks , que problema surge?
+
+R: O callback hell, que dificulta a leitura da função implementada.
+
+Gabarito: Surge o "callback hell", que nada mais é uma sequência de callbacks uma dentro da outra, o que dificulta a leitura e escalabilidade do código.
+
+3. Por que as Promises são uma forma de se resolver esse problema?
+
+R: Pois utilizam o then e catch, conseguindo encadear um no outro sem utilizar diversas callbacks uma dentro da outra. A legibilidade fica melhor utilizando promises.
+
+Gabarito: Porque ela é uma instrução assíncrona e faz o tratamento dos 3 casos que uma instrução assíncrona pode ter, Pending, Fulfilled e Rejected, de uma forma mais direta, evitando ter que tratar essas situações em cada callback.
+
+4. Quando você vai se comunicar com uma API , tal comunicação deve ser síncrona ou assíncrona? Lembre-se de que o serviço ao qual você está se conectando pode demorar muito ou pouco para dar retorno, pode estar fora do ar etc.
+
+R: Assíncrona, pois enquanto espera a resposta da API o restante do código continua rodando.
+
+Gabarito: Assíncrona, porquê não se tem controle do tempo e da integridade da resposta da API.
+
+5. Dada a resposta anterior, o que é fetch e para que ele serve?
+
+R: O fetch é uma função que tem como finalidade fazer uma requisição para uma API e irá retornar a sua resposta.
+
+Gabarito: Fetch é uma função que faz uma requisição á API, ela tem ferramentas para tratar os dados recebidos, tanto no sucesso quanto no erro.
