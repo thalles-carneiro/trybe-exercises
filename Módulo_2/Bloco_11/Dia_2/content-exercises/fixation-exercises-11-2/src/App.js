@@ -1,6 +1,7 @@
 // arquivo App.js, criado pelo create-react-app, modificado
 import React from 'react';
 import UserProfile from './components/UserProfile';
+import Greeting from './components/Greeting';
 
 class App extends React.Component {
   render() {
@@ -21,6 +22,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <Greeting name='Paturso' lastName='Xablau'/>
         {users.map(user => <UserProfile key={user.id} user={user} />)}
       </div>
     );
