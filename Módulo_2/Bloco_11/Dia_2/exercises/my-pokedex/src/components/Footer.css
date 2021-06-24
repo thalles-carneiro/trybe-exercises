@@ -1,0 +1,10 @@
+.pokemon-footer {
+  color: #fff;
+  font-size: 20px;
+  background-color: gray;
+  display: flex;
+  height: 50px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center
+}
