@@ -1,14 +1,17 @@
 import React from 'react';
 import Button from './components/Button';
 
-class App extends React.Component {
+const buttons = [
+  { id: 1, text: 'Botão 1' },
+  { id: 2, text: 'Botão 2' },
+  { id: 3, text: 'Botão 3' },
+];
 
+class App extends React.Component {
   render() {
     return (
       <>
-        <Button btnText="Botão 1"/>
-        <Button btnText="Botão 2"/>
-        <Button btnText="Botão 3"/>
+        {buttons.map((button) => <Button key={ button.id } btnText={ button.text } />)}
       </>
     );
   }
