@@ -7,23 +7,32 @@ class Button extends Component {
     super();
     this.state = {
       clickCounter: 0,
+      btnColor: '',
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(text) {
-    console.log(`Ih, cliquei no ${text}!`);
-    this.setState(({ clickCounter }) => ({
-      clickCounter: clickCounter + 1,
+    const { clickCounter } = this.state;
+    this.setState((state) => ({
+      clickCounter: state.clickCounter + 1,
     }));
+    if (clickCounter % 2 === 1) {
+      this.setState(() => ({ btnColor: 'btn-green' }));
+      console.log(`Ih, o ${text} está VERDE!`);
+    } else {
+      this.setState(() => ({ btnColor: '' }));
+      console.log(`Ih, o ${text} está CINZA!`);
+    }
   }
 
   render() {
     const { btnText } = this.props;
-    const { clickCounter } = this.state;
+    const { clickCounter, btnColor } = this.state;
+    const clickFunc = () => this.handleClick(btnText);
     return (
       <div>
-        <button type="button" onClick={ () => this.handleClick(btnText) }>
+        <button type="button" className={ btnColor } onClick={ clickFunc }>
           { btnText }
         </button>
         <Counter clicks={ clickCounter } btnText={ btnText } />
