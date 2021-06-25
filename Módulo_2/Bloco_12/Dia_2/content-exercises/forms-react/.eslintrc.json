@@ -6,7 +6,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "trybe-frontend"
+        "trybe-frontend",
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -19,5 +19,6 @@
         "react"
     ],
     "rules": {
+        
     }
 }
