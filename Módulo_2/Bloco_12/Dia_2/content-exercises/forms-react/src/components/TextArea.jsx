@@ -6,18 +6,18 @@ class TextArea extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: '',
+      textareaValue: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   handleOnChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ textareaValue: event.target.value });
   }
 
   render() {
     const { name, id, label } = this.props;
-    const { value } = this.state;
+    const { textareaValue } = this.state;
     return (
       /** Fonte: https://stackoverflow.com/questions/62306461/label-must-have-associated-control */
       <label className="textarea-label-form" htmlFor={ id }>
@@ -26,7 +26,7 @@ class TextArea extends React.Component {
           className="textarea-form"
           name={ name }
           id={ id }
-          value={ value }
+          value={ textareaValue }
           onChange={ this.handleOnChange }
         />
       </label>

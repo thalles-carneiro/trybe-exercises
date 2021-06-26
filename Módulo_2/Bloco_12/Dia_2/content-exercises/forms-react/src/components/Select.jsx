@@ -7,18 +7,18 @@ class Select extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      value: props.options[0],
+      selectValue: props.options[0],
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   handleOnChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ selectValue: event.target.value });
   }
 
   render() {
     const { name, id, label, options } = this.props;
-    const { value } = this.state;
+    const { selectValue } = this.state;
     return (
       <label className="select-label-form" htmlFor={ id }>
         { label }
@@ -26,7 +26,7 @@ class Select extends React.Component {
           className="select-form"
           name={ name }
           id={ id }
-          value={ value }
+          value={ selectValue }
           onChange={ this.handleOnChange }
         >
           {options.map((option) => <Option key={ option } option={ option } />)}

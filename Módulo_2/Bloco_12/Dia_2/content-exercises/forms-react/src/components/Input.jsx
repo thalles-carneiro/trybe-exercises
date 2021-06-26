@@ -6,18 +6,18 @@ class Input extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: '',
+      inputValue: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   handleOnChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ inputValue: event.target.value });
   }
 
   render() {
     const { name, id, label, type } = this.props;
-    const { value } = this.state;
+    const { inputValue } = this.state;
     return (
       /** Fonte: https://stackoverflow.com/questions/62306461/label-must-have-associated-control */
       <label className="input-label-form" htmlFor={ id }>
@@ -27,7 +27,7 @@ class Input extends React.Component {
           name={ name }
           id={ id }
           type={ type }
-          value={ value }
+          value={ inputValue }
           onChange={ this.handleOnChange }
         />
       </label>
