@@ -4,30 +4,17 @@ import Option from './Option';
 import './Select.css';
 
 class Select extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      selectValue: props.options[0],
-    };
-    this.handleOnChange = this.handleOnChange.bind(this);
-  }
-
-  handleOnChange(event) {
-    this.setState({ selectValue: event.target.value });
-  }
-
   render() {
-    const { name, id, label, options } = this.props;
-    const { selectValue } = this.state;
+    const { id, name, label, value, options, handleChange } = this.props;
     return (
       <label className="select-label-form" htmlFor={ id }>
         { label }
         <select
-          className="select-form"
-          name={ name }
           id={ id }
-          value={ selectValue }
-          onChange={ this.handleOnChange }
+          name={ name }
+          value={ value }
+          onChange={ handleChange }
+          className="select-form"
         >
           {options.map((option) => <Option key={ option } option={ option } />)}
         </select>
@@ -36,6 +23,13 @@ class Select extends React.Component {
   }
 }
 
-Select.propTypes = PropTypes.arrayOf(PropTypes.string).isRequired;
+Select.propTypes = PropTypes.exact({
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleChange: PropTypes.func.isRequired,
+}).isRequired;
 
 export default Select;
