@@ -17,9 +17,37 @@ class Form extends React.Component {
       description: '',
       civilStatus: civilStatusOptions[0],
       terms: false,
+      formWithErrors: false,
     };
 
+    this.handleErrors = this.handleError.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleError() {
+    const { fullname, age, description } = this.state;
+
+    const maxLengthFullname = 40;
+    const maxLengthAge = 3;
+    const maxLengthDescription = 200;
+
+    const errorCases = [
+      fullname.length > maxLengthFullname,
+      age.length > maxLengthAge,
+      description.length > maxLengthDescription,
+    ];
+
+    const formHasErrors = errorCases.some((error) => error === true);
+
+    if (formHasErrors === true) {
+      this.setState({
+        formWithErrors: true,
+      });
+    } else {
+      this.setState({
+        formWithErrors: false,
+      });
+    }
   }
 
   handleChange({ target }) {
@@ -27,12 +55,12 @@ class Form extends React.Component {
     const value = (type === 'checkbox') ? target.checked : target.value;
     this.setState({
       [name]: value,
-    });
+    }, () => this.handleError());
   }
 
   render() {
-    const { fullname, age, description, civilStatus, terms } = this.state;
-
+    const { fullname, age, description, civilStatus, terms, formWithErrors } = this.state;
+    const errorMsg = 'Por gentileza, insira valores válidos.';
     return (
       <form className="form-container">
 
@@ -79,7 +107,7 @@ class Form extends React.Component {
           checked={ terms }
           handleChange={ this.handleChange }
         />
-
+        { (formWithErrors) ? <span style={ { color: 'red' } }>{errorMsg}</span> : ''}
       </form>
     );
   }

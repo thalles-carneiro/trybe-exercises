@@ -28,7 +28,9 @@ class Input extends React.Component {
           onChange={ handleChange }
           className="input-form"
         />
-        <span className="max-length-error">{(error !== undefined) ? error : ''}</span>
+        <span className="max-length-error">
+          {(error !== undefined) ? error : ''}
+        </span>
       </label>
     );
   }
