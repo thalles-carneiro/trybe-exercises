@@ -6,6 +6,10 @@ class TextArea extends React.Component {
   render() {
     const { id, name, label, value, handleChange } = this.props;
 
+    const maxLength = 200;
+    let error;
+    if (value.length > maxLength) error = 'Texto muito grande!';
+
     return (
       /** Fonte: https://stackoverflow.com/questions/62306461/label-must-have-associated-control */
       <label className="textarea-label-form" htmlFor={ id }>
@@ -17,6 +21,7 @@ class TextArea extends React.Component {
           onChange={ handleChange }
           className="textarea-form"
         />
+        <span className="max-length-error">{(error !== undefined) ? error : ''}</span>
       </label>
     );
   }
