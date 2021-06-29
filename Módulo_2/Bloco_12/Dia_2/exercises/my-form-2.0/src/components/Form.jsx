@@ -4,6 +4,7 @@ import LastJobData from './LastJobData';
 import ShowData from './ShowData';
 import Button from './Button';
 import { allInitials } from '../data';
+import './Form.css'
 
 const INITIAL_STATE = {
   fullname: '',
@@ -52,25 +53,42 @@ class Form extends Component {
 
     return (
       <>
-        <h1>Formulário de Cadastro de Currículo</h1>
-        
-        <PersonalData
-          fullname={ fullname }
-          email={ email }
-          cpf={ cpf }
-          address={ address }
-          city={ city }
-          state={ state }
-          addressType={ addressType }
-          handleChange={ this.handleChange }
-        />
+        <form className="form-container" hidden={ submitted }>
+          <h1 className="h1-form">Formulário de Cadastro de Currículo</h1>
+          
+          <PersonalData
+            fullname={ fullname }
+            email={ email }
+            cpf={ cpf }
+            address={ address }
+            city={ city }
+            state={ state }
+            addressType={ addressType }
+            handleChange={ this.handleChange }
+          />
 
-        <LastJobData
-          curriculumResume={ curriculumResume }
-          role={ role }
-          roleDescription={ roleDescription }
-          handleChange={ this.handleChange }
-        />
+          <LastJobData
+            curriculumResume={ curriculumResume }
+            role={ role }
+            roleDescription={ roleDescription }
+            handleChange={ this.handleChange }
+          />
+
+          <div className="btn-container">
+            <Button
+              type="button"
+              value="Enviar"
+              onClick={ this.sendForm }
+            />
+
+            <Button
+              type="reset"
+              value="Limpar"
+              onClick={ this.resetForm }
+            />
+          </div>
+
+        </form>
 
         <ShowData
           fullname={ fullname }
@@ -84,18 +102,6 @@ class Form extends Component {
           role={ role }
           roleDescription={ roleDescription }
           hidden={ !submitted }
-        />
-
-        <Button
-          type="button"
-          value="Enviar"
-          onClick={ this.sendForm }
-        />
-
-        <Button
-          type="reset"
-          value="Limpar"
-          onClick={ this.resetForm }
         />
       </>
     );

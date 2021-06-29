@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './TextArea.css';
 
 class TextArea extends Component {
   render() {
@@ -6,7 +7,7 @@ class TextArea extends Component {
     const { maxLength, value, required, handleChange } = this.props;
 
     return (
-      <label htmlFor={ name }>
+      <label htmlFor={ name } className="textarea-label-form">
         { label }
         <textarea
         id={ name }
@@ -18,6 +19,7 @@ class TextArea extends Component {
         value={ value }
         required={ required }
         onChange={ handleChange }
+        className="textarea-form"
         >
       </textarea>
     </label>
