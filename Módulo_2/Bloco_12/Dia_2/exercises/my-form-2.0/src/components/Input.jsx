@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import './Input.css';
 
 class Input extends Component {
   render() {
     const { label, type, name, placeholder  } = this.props;
     const { maxLength, value, required, handleChange } = this.props;
     return (
-      <label htmlFor={ name }>
+      <label htmlFor={ name } className="input-label-form">
         { label }
         <input
         type={ type }
@@ -16,6 +17,7 @@ class Input extends Component {
         value={ value }
         required={ required }
         onChange={ handleChange }
+        className="input-form"
         />
       </label>
     );

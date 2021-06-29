@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './ShowData.css';
 
 class ShowData extends Component {
   render() {
@@ -6,7 +7,7 @@ class ShowData extends Component {
     const { curriculumResume, role, roleDescription, hidden } = this.props;
 
     return (
-      <div hidden={ hidden }>
+      <div hidden={ hidden } /* className="div-show-data-container" */>
         <h3>Consolidado de dados do formulário</h3>
         <p>Nome: { fullname }</p>
         <p>E-mail: { email }</p>

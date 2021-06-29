@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Button.css';
 
 class Button extends Component {
   render() {
@@ -9,6 +10,7 @@ class Button extends Component {
         type={ type }
         value={ value }
         onClick={ onClick }
+        className={`btn-${type}-form`}
       >
         { value }
       </button>
