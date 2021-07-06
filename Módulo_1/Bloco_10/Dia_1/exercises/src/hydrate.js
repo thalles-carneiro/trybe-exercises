@@ -14,9 +14,8 @@
 '2 copos de água'
 
 function hydrate(string) {
-  const glassesOfWater = string.split('')
-    .filter((character) => typeof parseInt(character) === 'number')
-    .reduce((sum, num) => sum + parseInt(num), 0);
+  const glassesOfWater = string.match(/[0-9]/g)
+    .reduce((sum, num) => sum + (+num), 0);
   if (glassesOfWater === 1) return '1 copo de água';
   return `${glassesOfWater} copos de água`;
 }
