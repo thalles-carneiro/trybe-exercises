@@ -17,4 +17,4 @@ export const fetchDogs = () => (dispatch) => {
       (json) => dispatch(getImage(json)),
       (error) => dispatch(failedRequest(error)),
     );
-}
+};
