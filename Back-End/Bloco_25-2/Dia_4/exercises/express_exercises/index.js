@@ -3,10 +3,13 @@ const bodyParser = require('body-parser');
 const rescue = require('express-rescue');
 
 const simpsonsUtils = require('./fs-utils');
+const authMiddleware = require('./authMiddleware');
+const generateToken = require('./generateToken');
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(authMiddleware);
 
 app.get('/ping', (_req, res) => {
   res.status(200).json({ message: 'pong' });
@@ -63,6 +66,18 @@ app.post('/simpsons', rescue(async (req, res) => {
   await simpsonsUtils.setSimpsons([...simpsons, { id, name }]);
   return res.status(204).end();
 }));
+
+app.post('/signup', (req, res) => {
+  const { email, password, firstName, phone } = req.body;
+
+  if([email, password, firstName, phone].includes(undefined)) {
+    return res.status(401).json({ message: 'Missing fields' });
+  }
+
+  const token = generateToken();
+
+  res.status(200).json({ token });
+});
 
 app.use((err, _req, res, _next) => {
   res.status(500).send(`Algo deu errado! Mensagem: ${err.message}`)
