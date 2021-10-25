@@ -1,3 +1,4 @@
+const { ObjectId } = require('bson');
 const connection = require('./connection');
 
 const isValid = (firstName, middleName, lastName) => {
@@ -32,35 +33,29 @@ const serialize = (authorData) => ({
 });
 
 const getAll = async () => {
-  const query =
-  `SELECT
-    id, first_name, middle_name, last_name
-  FROM
-    authors;`;
-  const [authors] = await connection.execute(query);
+  const authors = await connection()
+    .then((db) => db.collection('authors').find().toArray());
 
-  return authors.map(serialize).map(getNewAuthor);
+  return authors.map(({ _id, firstName, middleName, lastName }) => (
+    getNewAuthor({ id: _id, firstName, middleName, lastName })
+  ));
 };
 
 const findById = async (id) => {
-  const query =
-  `SELECT
-    id, first_name, middle_name, last_name
-  FROM
-    authors
-  WHERE
-    id=?`;
-  const [authorData] = await connection.execute(query, [id]);
+  if (!ObjectId.isValid(id)) return null;
 
-  if (authorData.length === 0) return null;
+  const authorData = await connection()
+    .then((db) => db.collection('authors').findOne(ObjectId(id)));
 
-  return authorData.map(serialize).map(getNewAuthor)[0];
+  if (!authorData) return null;
+
+  return getNewAuthor({ id, ...authorData });
 };
 
-const create = async (firstName, middleName, lastName) => connection.execute(
-  'INSERT INTO authors (first_name, middle_name, last_name) VALUES (?, ?, ?)',
-  [firstName, middleName, lastName],
-);
+const create = async (firstName, middleName, lastName) =>
+  connection()
+    .then((db) => db.collection('authors').insertOne({ firstName, middleName, lastName }))
+    .then((author) => getNewAuthor({ id: author.insertedId, firstName, middleName, lastName }));
 
 module.exports = {
   getAll,

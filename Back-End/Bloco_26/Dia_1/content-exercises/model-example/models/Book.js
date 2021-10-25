@@ -1,9 +1,11 @@
+const { ObjectId } = require('mongodb');
+
 const connection = require('./connection');
 const Author = require('./Author');
 
 const isValid = async (title, authorId) => {
   if (!title || typeof title !== 'string' || title.length < 3) return false;
-  if (!authorId || typeof authorId !== 'number' || !(await Author.findById(authorId))) return false;
+  if (!authorId || authorId.length !== 24 || !(await Author.findById(authorId))) return false;
 
   return true;
 };
@@ -15,32 +17,35 @@ const serialize = (bookData) => ({
 });
 
 const getAll = async () => {
-  const query = 'SELECT * FROM books;';
-  const [books] = await connection.execute(query);
+  const books = await connection()
+    .then((db) => db.collection('books').find().toArray());
 
-  return books.map(serialize);
+  return books.map(({ _id, title, author_id }) => ({ id: _id, title, authorId: author_id }));
 }
 
 const getByAuthorId = async (authorId) => {
-  const query = 'SELECT * FROM books WHERE author_id=?;';
-  const [books] = await connection.execute(query, [authorId]);
+  const books = await connection()
+    .then((db) => db.collection('books').find({ author_id: Number(authorId) }).toArray());
 
-  return books.map(serialize);
+  return books.map(({ _id, title, author_id }) => ({ id: _id, title, authorId: author_id }));
 };
 
 const getById = async (id) => {
-  const query = 'SELECT * FROM books WHERE id=?';
-  const [book] = await connection.execute(query, [id]);
+  if (!ObjectId.isValid(id)) return null;
+  
+  const bookData = await connection()
+    .then((db) => db.collection('books').findOne(ObjectId(id)));
 
-  if (book.length === 0) return null;
+  if (!bookData) return null;
 
-  return book.map(serialize)[0];
+  const { _id, title, author_id } = bookData;
+  return { id: _id, title, authorId: author_id };
 };
 
-const create = async (title, authorId) => connection.execute(
-  'INSERT INTO books (title, author_id) VALUES (?, ?)',
-  [title, authorId],
-);
+const create = async (title, authorId) =>
+  connection()
+    .then((db) => db.collection('books').insertOne({ title, author_id: authorId }))
+    .then((book) => ({ id: book.insertedId, title, author_id: authorId }));
 
 module.exports = {
   getAll,
