@@ -2,8 +2,6 @@ const rescue = require('express-rescue');
 
 const UserModel = require('../models/User');
 
-const createUserSchema = 
-
 module.exports = [
   (req, _res, next) => {
     const { error } = UserModel.isValid(req.body);
@@ -19,4 +17,4 @@ module.exports = [
 
     res.status(201).json(newUser);
   }),
-]
+];

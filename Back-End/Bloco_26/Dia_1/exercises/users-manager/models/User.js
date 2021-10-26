@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const { ObjectId } = require('mongodb');
 
 const connection = require('./connection');
 
@@ -16,48 +15,39 @@ const userSchema = Joi.object({
 
 const isValid = (userData) => userSchema.validate(userData);
 
-const formatUser = (userData) => {
-  const { _id, password, ...user } = userData;
-  const formattedUser = { id: _id, ...user };
-  return formattedUser;
-};
+const formatUser = ({ id, first_name: firstName, last_name: lastName, email }) => ({
+  id,
+  firstName,
+  lastName,
+  email,
+})
 
-const create = ({ firstName, lastName, email, password }) =>
-  connection()
-    .then((db) => db.collection('users').insertOne({ firstName, lastName, email, password }))
-    .then((user) => ({ id: user.insertedId, firstName, lastName, email }));
+const create = ({ firstName, lastName, email, password }) => connection.execute(
+  'INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?);',
+  [firstName, lastName, email, password],
+).then(([result]) => ({ id: result.insertId, firstName, lastName, email }));
 
-const findAll = () =>
-  connection()
-    .then((db) => db.collection('users').find().toArray())
-    .then((users) => users.map(formatUser));
+
+const findAll = () => connection.execute('SELECT * FROM users;')
+  .then(([results]) => results.map(formatUser));
 
 const findById = async (id) => {
-  if (!ObjectId.isValid(id)) return null;
-
-  const user = await connection()
-    .then((db) => db.collection('users').findOne(ObjectId(id)));
+  const user = await connection
+    .execute('SELECT * FROM users WHERE id = ?;', [id])
+    .then(([result]) => (result.length ? result[0] : null));
 
   if (!user) return null;
 
   return formatUser(user);
-}
+};
 
 const updateUser = async (id, { firstName, lastName, email, password }) => {
-  if (!ObjectId.isValid(id)) return null;
+  await connection.execute(
+    'UPDATE users SET first_name = ?, last_name = ?, email = ?, password = ? WHERE id = ?;',
+    [firstName, lastName, email, password, id],
+  );
 
-  const updatedUser = await connection()
-    .then((db) => {
-      const userId = new ObjectId(id);
-      const newData = { firstName, lastName, email, password };
-      return db.collection('users')
-        .findOneAndUpdate({ _id: userId }, { $set: newData }, { returnDocument: 'after' })
-        .then((result) => result.value);
-    });
-
-  if (!updatedUser) return null;
-
-  return formatUser(updatedUser);
+  return findById(id);
 };
 
 module.exports = {

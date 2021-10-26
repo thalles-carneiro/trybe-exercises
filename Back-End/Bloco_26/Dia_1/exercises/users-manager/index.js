@@ -1,11 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const middlewares = require('./middlewares');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.post('/user', middlewares.createUser);
 app.get('/user', middlewares.getAllUsers);
