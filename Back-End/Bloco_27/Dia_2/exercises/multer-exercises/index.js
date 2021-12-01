@@ -26,7 +26,27 @@ app.use(express.static(path.resolve(__dirname, 'uploads')));
 
 app.get('/ping', controllers.ping);
 
-app.post('/upload', middlewares.upload.single('file'), controllers.upload);
+app.post(
+  '/upload',
+  middlewares.upload.single('file'),
+  controllers.upload,
+);
+app.post(
+  '/multiple',
+  middlewares.multiple.array('files'),
+  controllers.multiple,
+);
+
+app.post(
+  '/profile',
+  middlewares.profile.single('profilePic'),
+  controllers.profile,
+);
+
+app.get(
+  '/profile/:id',
+  controllers.getProfile,
+);
 
 app.use(middlewares.error);
 

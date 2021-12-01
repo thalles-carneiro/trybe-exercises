@@ -11,5 +11,5 @@ module.exports = (req, res, _next) => {
     return res.status(200).json({ message: 'Arquivo salvo com sucesso' });
   }
 
-  return res.status(204).json('Erro ao salvar o arquivo');
+  return res.status(204).json({ message: 'Erro ao salvar o arquivo' });
 };
