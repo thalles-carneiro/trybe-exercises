@@ -1,0 +1,10 @@
+.input-checkbox-label-form {
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+  font-weight: 700;
+}
+
+.input-checkbox-form {
+  margin-left: 10px;
+}
