@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redux sem React</title>
+  <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+</head>
+
+<body>
+  <div>
+    Contador: <span id="value">0</span>
+    <br>
+    Número de cliques: <span id="clickCount">0</span>
+    <br>
+    Valores: <span id="addedValues">[]</span>
+    <br>
+    <br>
+    <button id="increment">+</button>
+    <button id="decrement">-</button>
+    <button onclick="handleIncrement()">+<span id="incrementCounter">10</span></button>
+    <button onclick="handleDecrement()">-<span id="decrementCounter">10</span></button>
+    <br>
+    <br>
+    <label for="incrementCounter">
+      Incrementar em:
+      <input id="incrementInput" type="number" min="1" style="width: 50px">
+    </label>
+    <br>
+    <br>
+    <label for="decrementCounter">
+      Decrementar em:
+      <input id="decrementInput" type="number" min="1" style="width: 50px">
+    </label>
+  </div>
+  <script>
+    const INCREMENT = 'INCREMENT';
+    const DECREMENT = 'DECREMENT';
+    const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
+    const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+    const INITIAL_STATE = {
+      value: 0,
+      incrementCounter: 10,
+      decrementCounter: 10,
+      clickCount: 0,
+      addedValues: [],
+    }    
+    //um arquivo store.js
+    const store = Redux.createStore(contadorReducer)
+
+    // outro arquivo /reducers/contador.js
+    function contadorReducer(state = INITIAL_STATE, action) {
+      switch (action.type) {
+        case INCREMENT:
+          return {
+            ...state,
+            value: state.value + action.value,
+            clickCount: state.clickCount + 1,
+            addedValues: [...state.addedValues, action.value],
+          };
+          break;
+        case DECREMENT:
+          return {
+            ...state,
+            value: state.value - action.value,
+            clickCount: state.clickCount + 1,
+            addedValues: [...state.addedValues, -action.value],
+          };
+        case INCREMENT_COUNTER:
+          return {
+            ...state,
+            incrementCounter: action.incrementCounter,
+          };
+          break;
+        case DECREMENT_COUNTER:
+          return {
+            ...state,
+            decrementCounter: action.decrementCounter,
+          };
+          break;
+        default:
+          return state;
+          break;
+      }
+    }
+
+    document.getElementById('increment').addEventListener('click', () => {
+      store.dispatch({
+        type: INCREMENT,
+        value: 1
+      })
+    })
+
+    document.getElementById('decrement').addEventListener('click', () => {
+      store.dispatch({
+        type: DECREMENT,
+        value: 1
+      })
+    })
+
+    document.getElementById('incrementInput').addEventListener("change", ({ target }) => {
+      store.dispatch({
+        type: INCREMENT_COUNTER,
+        incrementCounter: target.value,
+      })
+    })
+
+    document.getElementById('decrementInput').addEventListener("change", ({ target }) => {
+      store.dispatch({
+        type: DECREMENT_COUNTER,
+        decrementCounter: target.value,
+      })
+    })
+
+    function handleIncrement() {
+      store.dispatch({
+        type: INCREMENT,
+        value: store.getState().incrementCounter,
+      })
+    }
+
+    function handleDecrement() {
+      store.dispatch({
+        type: DECREMENT,
+        value: store.getState().decrementCounter,
+      })
+    }
+
+    // Non existe no react
+    store.subscribe(() => {
+      document.getElementById('value').innerHTML = store.getState().value;
+      document.getElementById('clickCount').innerHTML = store.getState().clickCount;
+      document.getElementById('addedValues').innerHTML = `[${store.getState().addedValues}]`;
+      document.getElementById('incrementCounter').innerHTML = store.getState().incrementCounter;
+      document.getElementById('decrementCounter').innerHTML = store.getState().decrementCounter;
+    });
+
+  </script>
+</body>
+
+</html>
