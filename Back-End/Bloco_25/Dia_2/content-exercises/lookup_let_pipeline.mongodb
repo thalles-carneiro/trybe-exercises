@@ -1,0 +1,94 @@
+use("agg_example");
+db.clients.find();
+
+use("agg_example");
+db.transactions.find();
+
+
+// 1. Selecione todos os clientes com as suas respectivas transações feitas;
+use("agg_example");
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      localField: "name",
+      foreignField: "from",
+      as: "transactions",
+    }
+  },
+]);
+
+use("agg_example");
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      let: { user_name: "$name" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$from", "$$user_name"],
+            },
+          },
+        },
+      ],
+      as: "transactions",
+    }
+  },
+]);
+
+// 2. Selecione os quatro primeiros clientes com as suas respectivas transações recebidas ordenados pelo estado em ordem alfabética;
+use("agg_example");
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      let: { user_name: "$name" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$to", "$$user_name"],
+            },
+          },
+        },
+      ],
+      as: "received_transactions",
+    }
+  },
+  {
+    $sort: {
+      State: 1,
+    },
+  },
+  {
+    $limit: 4,
+  },
+]);
+
+// 3. Selecione todos os cliente do estado da "Florida" e suas respectivas transações recebidas.
+use("agg_example");
+db.clients.aggregate([
+  {
+    $match: {
+      State: "Florida",
+    },
+  },
+  {
+    $lookup: {
+      from: "transactions",
+      let: { user_name: "$name" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$to", "$$user_name"],
+            },
+          },
+        },
+      ],
+      as: "received_transactions",
+    },
+  },
+]);
